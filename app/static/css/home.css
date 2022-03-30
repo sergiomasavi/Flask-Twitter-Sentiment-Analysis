@@ -1,0 +1,82 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-hashtag {
+  width: 100%;
+  max-width: 50%;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-hashtag .form-floating:focus-within {
+  z-index: 2;
+}
+
+.container-fixed {
+	margin-top: 65px;
+	margin-bottom: 10px;
+}
+.container {
+  max-width: 960px;
+}
+
+.form-select{
+  margin-bottom: 30px;
+}
+.card{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+.card_title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: large;
+}
+
+.card-header {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.carousel-caption {
+  top: 0;
+  bottom: auto;
+}
+
+.carousel-control.left, .carousel-control.right {
+  left: 0;
+  z-index: 1;
+}
+
+.slide{
+  margin-bottom: 200px;
+}
+.topic{
+  font-size:xx-large;
+}
+.count{
+  font-size:x-large;
+  margin-top:30px;
+}
+
+.progress{
+  margin-top: 80px;
+}
+
+.sentiment{
+  color: white;
+  font-style: italic;
+}
+.justify-content-between{
+  color:white;
+  font-size:30px;
+}

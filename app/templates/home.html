@@ -1,0 +1,107 @@
+{% extends './base.html' %}
+
+{% block title %}FaysPy Home{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="static/css/home.css">
+<link rel="stylesheet" href="static/css/base.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<!-- Calling jquery first -->
+<script src="static/scripts/jquery-1.7.1.min.js"></script>
+<script src="static/scripts/bootstrap.js"></script>
+<link rel="stylesheet" href="static/css/home.css">
+<link rel="stylesheet" href="static/css/base.css">
+{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid container-fixed">
+    <h1> ¡Bienvenido {{current_user.fullname}}!</h1>
+</div>
+
+<div class="container-fluid container-fixed">
+    <form class="form-hashtag" action="{{ url_for('home.search_topic') }}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="topic" name="topic">
+        <label for="topic" class="form-label">Introduce un topic de búsqueda en twitter</label>
+        <div id="topic" class="form-text"></div>
+      </div>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a class="btn btn-danger" href="{{ url_for('home.logout') }}">Logout</a>
+
+    </form>
+</div>
+
+<div class="row">
+  
+  <div class="col-2"></div>
+  
+  <div class="col-8">
+    <!-- Carousel wrapper -->
+    <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+
+    <div class="carousel-inner">
+      <!-- Single item -->
+      {% for card in card_list%}
+        <div class="carousel-item {% if loop.index==1 %} active {% endif %}">
+          <img src="static/img/background_card.jpeg" class="d-block w-100" width="100" height="250" alt="Sunset Over the City"/>
+            <div class="carousel-caption d-none d-md-block">
+              <div class="topic">
+                <h1>{{ card.topic }}</h1>
+              </div>
+              <div class="count">
+                <h2>{% if card.sentiment>60%} Sentimiento Positivo {% else %}} Sentimiento Negativo {% endif %} ({{ card.total_tweets }} tweets)</h2>
+              </div>
+              
+              <div class="progress">
+                <div class="progress-bar-striped progress-bar-animated {% if card.sentiment>60%} bg-success {% else %}} bg-danger {% endif %}" id="progress-bar" name="progress-bar" role="progressbar" style="width: {{card.sentiment}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <h2 class="sentiment">
+                      {{card.sentiment}} %
+                    </h2>
+                </div>
+              </div>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+      
+    <!-- Inner -->
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev" onclick="$('#carouselBasicExample').carousel('next')">
+      <span class="carousel-control-prev-icon" aria-hidden="true" onclick="$('#myCarousel').carousel('next')"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next" onclick="$('#carouselBasicExample').carousel('next')">
+      <span class="carousel-control-next-icon" aria-hidden="true" onclick="$('#myCarousel').carousel('next')"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <script>
+      $(function(){
+
+          $('.carousel-control').click(function(e){
+              e.preventDefault();
+              $('#carouselBasicExample').carousel( $(this).data() );
+          });
+
+      });//END document.ready
+    </script>
+
+  </div>
+  
+  
+  <div class="col-2"></div>
+
+</div>
+
+
+{% endblock %}
