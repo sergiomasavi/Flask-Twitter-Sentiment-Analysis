@@ -21,3 +21,6 @@ Se ha creado una aplicación web con Python con la funcionalidad explicada anter
 5.	Comunicación con la API de twitter para descargar y analizar los tweets.
 
 6.	Mostrar los resultados de las búsquedas que ha realizado el usuario para mostrarlas en la página del servicio.
+
+Enlace a la imagen docker publicada en Docker Hub:
+- https://hub.docker.com/repository/docker/sergiomasavi/fayspy-apps-ml-tf
