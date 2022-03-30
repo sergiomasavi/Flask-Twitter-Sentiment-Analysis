@@ -22,6 +22,12 @@ class ModelDatabase():
                     `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                     `password` varchar(102) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                    
+                    ALTER TABLE `usuarios`
+                    ADD PRIMARY KEY (`user_id`);
+                    ALTER TABLE `usuarios`
+                    MODIFY `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT 'Identificador del usuario';
+                    COMMIT;
                     """
                     conn.execute(query)
                     
@@ -34,7 +40,7 @@ class ModelDatabase():
                         `user` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que ha publicado el tweet',
                         `text` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'Texto del tweet',
                         `model_id` smallint(6) NOT NULL COMMENT 'Identificador del modelo',
-                        `prediction` float(10,0) NOT NULL COMMENT 'Sentimiento del tweet. Positivo = 1, Negativo = 0',
+                        `prediction` float(10,2) NOT NULL COMMENT 'Sentimiento del tweet. Positivo = 1, Negativo = 0',
                         `user_id` bigint(11) NOT NULL
                         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
                     """
@@ -58,6 +64,8 @@ class ModelDatabase():
                     `id` int(11) NOT NULL COMMENT 'Identificador del modelo',
                     `name` varchar(50) NOT NULL COMMENT 'Nombre del modelo'
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                    ALTER TABLE `models`
+                    ADD PRIMARY KEY (`id`);
                     """
                     conn.execute(query)
                     
